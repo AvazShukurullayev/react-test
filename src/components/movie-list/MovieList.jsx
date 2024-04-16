@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 
 export const MovieList = (props) => {
     const {data, onDelete, onUpdate, onFavouriteItem, onLikeItem} = props
-    console.log("MovieList data => ",data)
+    console.log("MovieList data => ", data)
     return (
         <Row>
             <Col>
@@ -15,15 +15,16 @@ export const MovieList = (props) => {
                     <Card.Body>
                         <ListGroup>
                             {
-                                data.length ? data.map(item => (<MovieListItem
+                                data.length ? data.map((item, index) => (<MovieListItem
                                         key={item.id}
                                         {...item}
+                                        index={index}
                                         onDelete={onDelete}
                                         onUpdate={onUpdate}
                                         onFavouriteItem={onFavouriteItem}
                                         onLikeItem={onLikeItem}
                                     />))
-                                    : <p className="text-center">No data</p>
+                                    : <p className="text-center m-0">No data</p>
                             }
                         </ListGroup>
                     </Card.Body>

@@ -7,14 +7,18 @@ export const AppInfo = ({allMoviesLength, favouriteMoviesLength, mostViewedMovie
             <Col>
                 <Card className="my-4 shadow">
                     <Card.Header>
-                        <Card.Title>Information about movies</Card.Title>
+                        <h3>Information about movies</h3>
                     </Card.Header>
                     <Card.Body>
                         <Row>
-                            <Col><Card.Text>Count of all movies: <Badge bg="dark">{allMoviesLength}</Badge></Card.Text></Col>
-                            <Col><Card.Text>Count of favourite movies:  <Badge bg="dark">{favouriteMoviesLength}</Badge> </Card.Text></Col>
-                            <Col><Card.Text>Count of liked movies:  <Badge bg="dark">{likedMoviesLength}</Badge></Card.Text></Col>
-                            <Col><Card.Text>Count of most viewed movies: <Badge bg="dark">{mostViewedMoviesLength}</Badge></Card.Text></Col>
+                            <Col>
+                                <Card.Title>Count of all movies: <Badge bg="dark">{allMoviesLength}</Badge></Card.Title>
+                                <Card.Title>Count of favourite movies: <Badge bg="warning">{favouriteMoviesLength}</Badge></Card.Title>
+                            </Col>
+                            <Col>
+                                <Card.Title>Count of liked movies: <Badge bg="info">{likedMoviesLength}</Badge></Card.Title>
+                                <Card.Title>Count of most viewed movies: <Badge bg="success">{mostViewedMoviesLength}</Badge></Card.Title>
+                            </Col>
                         </Row>
                     </Card.Body>
                 </Card>

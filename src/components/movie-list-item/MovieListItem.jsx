@@ -1,20 +1,18 @@
-import {Badge, ButtonGroup, Col, Form, ListGroup, Row} from "react-bootstrap";
+import {Badge, Button, ButtonGroup, Col, Form, ListGroup, Row} from "react-bootstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCookie, faStar} from '@fortawesome/free-solid-svg-icons';
 import PropTypes from "prop-types";
 import {UpdateModal} from "../update-modal/UpdateModal.jsx";
-import {FavouriteModal} from "../favourite-modal/FavouriteModal.jsx";
 import {DeleteModal} from "../delete-modal/DeleteModal.jsx";
-import {LikedModal} from "../liked-modal/LikedModal.jsx";
 
 export const MovieListItem = (props) => {
-    const {name, viewers, favourite, liked, id, onDelete, onUpdate, onFavouriteItem, onLikeItem} = props
+    const {name, viewers, favourite, liked, id, onDelete, onUpdate, onFavouriteItem, onLikeItem,index} = props
     console.log("MovieListItem props => ", props)
     return (
         <ListGroup.Item>
             <Row className="align-items-center">
                 <Col xs={8} className="d-flex align-items-center justify-content-between">
-                    <span>{name}</span>
+                    <span>{index + 1}. {name}</span>
                     <span className={"d-flex gap-2"}>{favourite && <Badge bg="warning" pill>
                         <FontAwesomeIcon icon={faCookie}/>
                     </Badge>} {liked && <Badge bg="info" pill>
@@ -28,9 +26,15 @@ export const MovieListItem = (props) => {
                         </Col>
                         <Col xs={5}>
                             <ButtonGroup>
-                                <UpdateModal onUpdate={onUpdate}/>
-                                <FavouriteModal onFavouriteItem={() => onFavouriteItem(id)}/>
-                                <LikedModal onLikeItem={() => onLikeItem(id)}/>
+                                <UpdateModal onUpdate={onUpdate} name={name} viewers={viewers}/>
+                                <Button size="sm" variant={favourite ? 'warning text-light' : 'outline-warning'}
+                                        onClick={() => onFavouriteItem(id)}>
+                                    <FontAwesomeIcon icon={faCookie}/>
+                                </Button>
+                                <Button variant={liked ? 'info text-light' : 'outline-info'} size="sm"
+                                        onClick={() => onLikeItem(id)}>
+                                    <FontAwesomeIcon icon={faStar}/>
+                                </Button>
                                 <DeleteModal onDelete={() => onDelete(id)}/>
                             </ButtonGroup>
                         </Col>
@@ -52,5 +56,6 @@ MovieListItem.propTypes = {
     onUpdate: PropTypes.func,
     onFavouriteItem: PropTypes.func,
     onLikeItem: PropTypes.func,
+    index: PropTypes.number,
 
 }

@@ -1,10 +1,10 @@
 import {useState} from "react";
-import {Button, Modal, Spinner} from "react-bootstrap";
+import {Button, Form, Modal, Spinner} from "react-bootstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPen} from "@fortawesome/free-solid-svg-icons";
 import PropTypes from "prop-types";
 
-export const UpdateModal = ({onUpdate}) => {
+export const UpdateModal = ({onUpdate,name, viewers}) => {
     const [show, setShow] = useState(false);
     const [isLoading, setIsLoading] = useState(false)
     const handleClose = () => setShow(false);
@@ -29,12 +29,23 @@ export const UpdateModal = ({onUpdate}) => {
                 <Modal.Header closeButton>
                     <Modal.Title>Modal heading</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>You are gonna update item, Are you agree?</Modal.Body>
+                <Modal.Body>
+                    <Form id="form-update">
+                        <Form.Group>
+                            <Form.Label>Update name of movie</Form.Label>
+                            <Form.Control type="text" placeholder={} name={} value={} onChange={} />
+                        </Form.Group>
+                        <Form.Group>
+                            <Form.Label>Update viewers of movie</Form.Label>
+                            <Form.Control type="number" placeholder={} name={} value={} onChange={} />
+                        </Form.Group>
+                    </Form>
+                </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>
                         Close
                     </Button>
-                    <Button variant="primary" onClick={onUpdateFn} disabled={isLoading}>
+                    <Button variant="primary" form="form-update" onClick={onUpdateFn} disabled={isLoading} type="submit">
                         {isLoading ? <><Spinner animation="border" size="sm"/> loading</> : "Save Changes"}
                     </Button>
                 </Modal.Footer>
@@ -44,5 +55,7 @@ export const UpdateModal = ({onUpdate}) => {
 }
 
 UpdateModal.propTypes = {
-    onUpdate: PropTypes.func
+    onUpdate: PropTypes.func,
+    name: PropTypes.string,
+    viewers: PropTypes.number
 }
